@@ -1,13 +1,18 @@
 import java.util.{Date, Locale}
 import java.text.{DateFormat, SimpleDateFormat}
 import dao._
-import model._
+import model.City
+import analytics.CityAnalytics
 
 /*
  * Author: Peter Tran
  * 
  * This application is for learning purposes, as an introduction to Scala.
- * Uses the "world" MySQL database, download available at http://dev.mysql.com/doc/index-other.html
+ * 
+ * Resources
+ * ++ MySQL world database: http://dev.mysql.com/doc/index-other.html
+ * ++ Functional Programming Principles in Scala: https://www.coursera.org/course/progfun
+ * ++ Programming in Scala, First Edition: http://www.artima.com/pins1ed/
  * 
  */
 
@@ -19,8 +24,10 @@ object World extends App {
     DBConnection.setUsername; DBConnection.setPassword
     try {
     	val cityDao = new CityDao
-    	val cities = cityDao.getCities
-    	cities.foreach(println)
+    	val cities = cityDao.getCities("NLD");
+    	val popByDistrict = CityAnalytics.populationByDistrict(cities)
+    	popByDistrict.foreach { case (key, value) => println (key + " --> " + value) }
+    	// cities.foreach(println)
     } catch {
 	    case e : Throwable => println(e.getMessage)
 	}

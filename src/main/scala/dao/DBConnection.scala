@@ -5,8 +5,8 @@ import java.sql.{ DriverManager, Connection }
 object DBConnection {
 	val driver = "com.mysql.jdbc.Driver"
     val url = "jdbc:mysql://localhost/world"
-    var username = "default"
-    var password = "default"
+    var username : String = "default"
+    var password : String = "default"
     
     def setUsername(): Unit = {
         this.username = readLine("Enter username: ")

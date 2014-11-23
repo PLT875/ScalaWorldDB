@@ -6,11 +6,10 @@ import scala.annotation.tailrec
 
 class CityDao {
   
-   
-	def getCities(): List[City] = {
+	def getCities(countryCode : String): List[City] = {
 	  
-		def queryCityTable(rs : ResultSet, acc : List[City]): List[City] = {
-			if(!rs.next) acc
+	    def queryCityTable(rs : ResultSet, acc : List[City]): List[City] = {
+	        if(!rs.next) acc
 			else queryCityTable(rs, acc :+ returnCity(rs) )
 		}
 	  
@@ -19,7 +18,7 @@ class CityDao {
 		}
 	  
 	    val connection : Connection = DBConnection.getConnection
-	    val resultSet = connection.createStatement.executeQuery("SELECT * FROM CITY WHERE CountryCode = 'NLD'")
+	    val resultSet = connection.createStatement.executeQuery(s"SELECT * FROM CITY WHERE CountryCode = '$countryCode'")
 	    val cities = queryCityTable(resultSet, Nil)
 	    connection.close
 	    cities   
