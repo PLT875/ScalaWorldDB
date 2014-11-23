@@ -18,6 +18,7 @@ object DBConnection {
     }
     
     def getConnection(): Connection = {
+        Class.forName(DBConnection.driver)
         DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password)
 	}
     
