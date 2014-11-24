@@ -1,5 +1,6 @@
 import java.util.{Date, Locale}
 import java.text.{DateFormat, SimpleDateFormat}
+import java.sql.{ DriverManager, Connection, ResultSet }
 import dao._
 import model.City
 import analytics.CityAnalytics
@@ -24,7 +25,12 @@ object World extends App {
     DBConnection.setUsername; DBConnection.setPassword
     try {
     	val cityDao = new CityDao
-    	val cities = cityDao.getCities("NLD");
+    	// val cities = cityDao.getCities("NLD");
+    	
+    	val connection : Connection = DBConnection.getConnection
+	    val resultSet = connection.createStatement.executeQuery(s"SELECT * FROM CITY WHERE CountryCode = 'NLD'")
+	    val cities = cityDao.queryCityTable(resultSet, Nil)
+	    connection.close
     	val popByDistrict = CityAnalytics.populationByDistrict(cities)
     	popByDistrict.foreach { case (key, value) => println (key + " --> " + value) }
     	// cities.foreach(println)
