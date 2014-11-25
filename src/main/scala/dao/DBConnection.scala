@@ -5,17 +5,8 @@ import java.sql.{ DriverManager, Connection }
 object DBConnection {
 	val driver = "com.mysql.jdbc.Driver"
     val url = "jdbc:mysql://localhost/world"
-    var username : String = "default"
-    var password : String = "default"
-    
-    def setUsername(): Unit = {
-        this.username = readLine("Enter username: ")
-    }
-    
-    def setPassword(): Unit = {
-        print("Enter password: ")
-    	this.password = new String(System.console.readPassword)
-    }
+    lazy val username : String = readLine("Enter username: ")
+    lazy val password : String = new String(System.console.readPassword("Enter password: "))
     
     def getConnection(): Connection = {
         Class.forName(DBConnection.driver)

@@ -22,15 +22,14 @@ object World extends App {
     println(s"*** $dateFormat: Getting Started with Scala - World Database ***")
     
     // Set user name and password for database connection
-    DBConnection.setUsername; DBConnection.setPassword
+    DBConnection.username; DBConnection.password
     try {
     	val cityDao = new CityDao
     	val cities = cityDao.getCities("NLD");
     	cities.foreach(println)
     	
-    	// val popByDistrict = CityAnalytics.populationByDistrict(cities)
-    	// popByDistrict.foreach { case (key, value) => println (key + " --> " + value) }
-    	// cities.foreach(println)
+    	val popByDistrict = CityAnalytics.populationByDistrict(cities)
+    	popByDistrict.foreach { case (key, value) => println (key + " --> " + value) }
     } catch {
 	    case e : Throwable => println(e.getMessage)
 	}
