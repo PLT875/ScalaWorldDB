@@ -2,8 +2,8 @@ import java.util.{Date, Locale}
 import java.text.{DateFormat, SimpleDateFormat}
 import java.sql.{ DriverManager, Connection, ResultSet }
 import dao._
-import model.City
-import analytics.CityAnalytics
+import model._
+import analytics._
 
 /*
  * Author: Peter Tran
@@ -24,15 +24,27 @@ object World extends App {
     // Set user name and password for database connection
     DBConnection.username; DBConnection.password
     try {
+        println("")
+        println("*** Cities - Netherlands ***")
     	val cityDao = new CityDao
     	val cities = cityDao.getCities("NLD");
     	cities.foreach(println)
     	
+    	println("")
+    	println("*** Population by District - Netherlands ***")
     	val popByDistrict = CityAnalytics.populationByDistrict(cities)
     	popByDistrict.foreach { case (key, value) => println (key + " --> " + value) }
+    	
+    	println("")
+    	println("*** Population Density of Countries in Southeast or Eastern Asia ***")
+    	val countryDao = new CountryDao
+    	val countries = countryDao.getCountries("'Southeast Asia' or Region = 'Eastern Asia'")
+    	val popDensity = CountryAnalytics.populationDensity(countries)
+    	popDensity.foreach(println)
+    	
     } catch {
 	    case e : Throwable => println(e.getMessage)
 	}
-    
+   
     
 }

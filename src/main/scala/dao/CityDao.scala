@@ -17,7 +17,7 @@ class CityDao {
 	@tailrec
     final def queryCityTable(rs : ResultSet, acc : List[City]): List[City] = {      	
 		if(!rs.next) acc
-		else queryCityTable(rs, acc :+ returnCity(rs) )
+		else queryCityTable(rs, acc :+ returnCity(rs))
     }
 	
 	private def returnCity(rs : ResultSet): City = {

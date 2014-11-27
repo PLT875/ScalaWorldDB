@@ -17,12 +17,11 @@ object Test {
 	class Netherlands extends NldCities
 	
 	
-	val nld = new Netherlands                 //> nld  : Test.Netherlands = Test$Netherlands@6c7d3bc4
-	val cityList = List(nld.ams, nld.rot, nld.haa, nld.ein, nld.til)
-                                                  //> cityList  : List[model.City] = List(Amsterdam | NLD | Noord-Holland | 731200
-                                                  //| , Rotterdam | NLD | Zuid-Holland | 593321, Haag | NLD | Zuid-Holland | 44090
-                                                  //| 0, Eindhoven | NLD | Noord-Brabant | 201843, Tilburg | NLD | Noord-Brabant |
-                                                  //|  193238)
+	val nld = new Netherlands                 //> nld  : Test.Netherlands = Test$Netherlands@6fdbad5b
+  val cityList = List(nld.ams, nld.rot, nld.haa, nld.ein, nld.til)
+                                                  //> cityList  : List[model.City] = List(Amsterdam, NLD, Noord-Holland, 731200, R
+                                                  //| otterdam, NLD, Zuid-Holland, 593321, Haag, NLD, Zuid-Holland, 440900, Eindho
+                                                  //| ven, NLD, Noord-Brabant, 201843, Tilburg, NLD, Noord-Brabant, 193238)
 	CityAnalytics.populationByDistrict(cityList)
                                                   //> res0: Map[String,Int] = Map(Noord-Holland -> 731200, Noord-Brabant -> 395081
                                                   //| , Zuid-Holland -> 1034221)
