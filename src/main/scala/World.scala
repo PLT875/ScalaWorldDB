@@ -40,8 +40,7 @@ object World extends App {
     	val countryDao = new CountryDao
     	val countries = countryDao.getCountries("'Southeast Asia' or Region = 'Eastern Asia'")
     	val popDensity = CountryAnalytics.populationDensity(countries)
-    	popDensity.foreach(println)
-    	
+    	popDensity.sortWith((c1, c2) => c1._2 > c2._2).foreach(println)
     } catch {
 	    case e : Throwable => println(e.getMessage)
 	}
