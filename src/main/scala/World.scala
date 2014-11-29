@@ -33,7 +33,7 @@ object World extends App {
     	println("")
     	println("*** Population by District - Netherlands ***")
     	val popByDistrict = CityAnalytics.populationByDistrict(cities)
-    	popByDistrict.foreach { case (key, value) => println (key + " --> " + value) }
+    	popByDistrict.foreach { case (key, value) => println ("(" + key + ", " + value + ")") }
     	
     	println("")
     	println("*** Population Density of Countries in Southeast or Eastern Asia ***")
