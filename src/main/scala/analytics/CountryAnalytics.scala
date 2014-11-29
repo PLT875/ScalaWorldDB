@@ -1,5 +1,4 @@
 package analytics
-
 import model._
 
 object CountryAnalytics {

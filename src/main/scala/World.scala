@@ -51,8 +51,7 @@ object World extends App {
     	val cheLanguages = countryLanguageDao.getCountryLanguage("CHE")
 
     	println("Population of Spoken Languages")
-    	val langPer = cheLanguages.map(cl => (cl.language, cl.percentage))
-    	langPer.map( cl => (cl._1, (cl._2 / 100) * chePopulation)).foreach(println)
+    	CountryLanguageAnalytics.languagePopulation(cheLanguages, chePopulation).foreach(println)
     	
     	
     } catch {
