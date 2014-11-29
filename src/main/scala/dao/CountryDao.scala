@@ -1,7 +1,7 @@
 package dao
 
 import java.sql.{ ResultSet, Connection, DriverManager }
-import model.Country
+import model._
 import scala.annotation.tailrec
 
 class CountryDao {
@@ -12,6 +12,12 @@ class CountryDao {
 	    val cities = queryCountryTable(resultSet, Nil)
 	    connection.close
 	    cities
+	}
+	
+	def getPopulation(name : String) : Int = {
+	    val connection : Connection = DBConnection.getConnection
+	    val resultSet = connection.createStatement.executeQuery(s"SELECT Population FROM COUNTRY WHERE Name = '$name'")
+	    if(resultSet.first) resultSet.getInt("Population") else 0
 	}
 	
 	@tailrec

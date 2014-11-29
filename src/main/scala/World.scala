@@ -41,6 +41,20 @@ object World extends App {
     	val countries = countryDao.getCountries("'Southeast Asia' or Region = 'Eastern Asia'")
     	val popDensity = CountryAnalytics.populationDensity(countries)
     	popDensity.sortWith((c1, c2) => c1._2 > c2._2).foreach(println)
+    	
+    	println("")
+    	println("*** Switzerland Statistics ***")
+    	val chePopulation = countryDao.getPopulation("Switzerland")
+    	println(s"Population: $chePopulation")
+    	
+    	val countryLanguageDao = new CountryLanguageDao
+    	val cheLanguages = countryLanguageDao.getCountryLanguage("CHE")
+
+    	println("Population of Spoken Languages")
+    	val langPer = cheLanguages.map(cl => (cl.language, cl.percentage))
+    	langPer.map( cl => (cl._1, (cl._2 / 100) * chePopulation)).foreach(println)
+    	
+    	
     } catch {
 	    case e : Throwable => println(e.getMessage)
 	}

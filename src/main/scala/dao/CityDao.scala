@@ -1,7 +1,7 @@
 package dao
 
 import java.sql.{ ResultSet, Connection, DriverManager }
-import model.City
+import model._
 import scala.annotation.tailrec
 
 class CityDao {
