@@ -17,7 +17,7 @@ object Test {
 	class Netherlands extends NldCities
 	
 	
-	val nld = new Netherlands                 //> nld  : Test.Netherlands = Test$Netherlands@6afc53
+	val nld = new Netherlands                 //> nld  : Test.Netherlands = Test$Netherlands@57a220c2
   val cityList = List(nld.ams, nld.rot, nld.haa, nld.ein, nld.til)
                                                   //> cityList  : List[model.City] = List((Amsterdam, NLD, Noord-Holland, 731200),
                                                   //|  (Rotterdam, NLD, Zuid-Holland, 593321), (Haag, NLD, Zuid-Holland, 440900), 
@@ -26,8 +26,19 @@ object Test {
 	CityAnalytics.populationByDistrict(cityList)
                                                   //> res0: Map[String,Int] = Map(Noord-Holland -> 731200, Noord-Brabant -> 395081
                                                   //| , Zuid-Holland -> 1034221)
-	//val res1 = cityList.map(city => (city.district, city.population))
-  //val res2 = res1.groupBy { case(district, population) => district }
-	//val res3 = res2.map(district => (district._1, district._2))
+	val res1 = cityList.map(city => (city.district, city.population))
+                                                  //> res1  : List[(String, Integer)] = List((Noord-Holland,731200), (Zuid-Holland
+                                                  //| ,593321), (Zuid-Holland,440900), (Noord-Brabant,201843), (Noord-Brabant,1932
+                                                  //| 38))
+  val res2 = res1.groupBy { case(district, population) => district }
+                                                  //> res2  : scala.collection.immutable.Map[String,List[(String, Integer)]] = Map
+                                                  //| (Noord-Holland -> List((Noord-Holland,731200)), Noord-Brabant -> List((Noord
+                                                  //| -Brabant,201843), (Noord-Brabant,193238)), Zuid-Holland -> List((Zuid-Hollan
+                                                  //| d,593321), (Zuid-Holland,440900)))
+	val res3 = res2.map(district => (district._1, district._2))
+                                                  //> res3  : scala.collection.immutable.Map[String,List[(String, Integer)]] = Map
+                                                  //| (Noord-Holland -> List((Noord-Holland,731200)), Noord-Brabant -> List((Noord
+                                                  //| -Brabant,201843), (Noord-Brabant,193238)), Zuid-Holland -> List((Zuid-Hollan
+                                                  //| d,593321), (Zuid-Holland,440900)))
 	
 }

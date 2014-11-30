@@ -53,6 +53,10 @@ object World extends App {
     	println("Population of Spoken Languages")
     	CountryLanguageAnalytics.languagePopulation(cheLanguages, chePopulation).foreach(println)
     	
+    	println("*** Population by District - Indonesia ***")
+    	val citiesIdn = cityDao.getCities("IDN");
+    	val popByDistrictIdn = CityAnalytics.populationByDistrict(citiesIdn).filter(x => (x._1.contains("Java")))
+    	popByDistrictIdn.foreach { case (key, value) => println ("(" + key + ", " + value + ")") }
     	
     } catch {
 	    case e : Throwable => println(e.getMessage)
