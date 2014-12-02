@@ -44,8 +44,14 @@ object World extends App {
             try {
 	            val countryCode = readLine("Enter a country code: ")
 	            val cityDao = new CityDao
-	    	    val cities = cityDao.getCities(countryCode);
+	    	    val cities = cityDao.getCities(countryCode)
 	            cities.foreach(println)
+	            println("")
+	            val yn = readLine("List population by district [y or n]: ")
+	            if(yn equals "y"){
+	            	val popByDistrict = CityAnalytics.populationByDistrict(cities)
+	            	popByDistrict.foreach { case (key, value) => println ("(" + key + ", " + value + ")") }
+	            }      
             } catch {
             	case e : Throwable => println(e.getMessage)
             } finally {
