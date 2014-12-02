@@ -19,16 +19,47 @@ import analytics._
 
 object World extends App {
 	val dateFormat = new SimpleDateFormat("yyyy-MM-dd").format(new Date)
-    println(s"*** $dateFormat: Getting Started with Scala - World Database ***")
+    println(s"*** $dateFormat: Getting Started with Scala - World Database Example ***")
     
     // Set user name and password for database connection
     DBConnection.username; DBConnection.password
-    try {
+    
+    menu
+ 
+    def menu(): Unit = {
         println("")
-        println("*** Cities - Netherlands ***")
-    	val cityDao = new CityDao
-    	val cities = cityDao.getCities("NLD");
-    	cities.foreach(println)
+        println("--- Options")
+        println("--- a. Get List of Cities By Country")
+        println("--- x. Exit")
+        val option : String = readLine("Enter an option: ")
+        matchChoice(option)
+        
+        def matchChoice(choice: String): Unit = choice match {
+            case "a" => listCities
+            case "x"=> System.exit(0)
+        }
+        
+        def listCities() : Unit = {
+            println("")
+            try {
+	            val countryCode = readLine("Enter a country code: ")
+	            val cityDao = new CityDao
+	    	    val cities = cityDao.getCities(countryCode);
+	            cities.foreach(println)
+            } catch {
+            	case e : Throwable => println(e.getMessage)
+            } finally {
+                menu
+            }		
+        }
+    
+    
+    }
+    
+    /*
+    
+    try {
+      
     	
     	println("")
     	println("*** Population by District - Netherlands ***")
@@ -61,6 +92,8 @@ object World extends App {
     } catch {
 	    case e : Throwable => println(e.getMessage)
 	}
+	
+	**/
    
     
 }
