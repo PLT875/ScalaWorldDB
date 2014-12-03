@@ -8,7 +8,7 @@ class CountryDao {
 	
 	def getCountries(region: String): List[Country] = {    	
 		val connection : Connection = DBConnection.getConnection
-		val resultSet = connection.createStatement.executeQuery(s"SELECT * FROM COUNTRY WHERE Region = $region")
+		val resultSet = connection.createStatement.executeQuery(s"SELECT * FROM COUNTRY WHERE Region = '$region'")
 		val cities = queryCountryTable(resultSet, Nil)
 		connection.close
 		cities

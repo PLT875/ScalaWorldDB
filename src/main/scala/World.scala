@@ -29,7 +29,8 @@ import analytics._
     def menu(): Unit = {
         println("")
         println("--- Options")
-        println("--- a. List of Cities By Country")
+        println("--- a. List Cities By Country")
+        println(" -- b. List Population Density By Region")
         println("--- x. Exit")
         val option : String = readLine("Enter an option: ")
 
@@ -41,6 +42,7 @@ import analytics._
 
            def matchChoice(choice: String): Unit = choice match {
             case "a" => listCities; menu
+            case "b" => listPopulationDensityByRegion; menu
             case "x"=> return
             case _ => println(s"Unknown option: $choice"); menu
         }
@@ -59,6 +61,14 @@ import analytics._
                 popByDistrict.foreach { case (key, value) => println ("(" + key + ", " + value + ")") }
             }
 
+        }
+
+        def  listPopulationDensityByRegion(): Unit = {
+            val region = readLine("Enter a region e.g. Eastern Asia: ")
+            val countryDao = new CountryDao
+            val countries = countryDao.getCountries(region)
+            val popDensity = CountryAnalytics.populationDensity(countries)
+            popDensity.sortWith((c1, c2) => c1._2 > c2._2).foreach(println)
         }
 
 
