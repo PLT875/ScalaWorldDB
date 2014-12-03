@@ -14,7 +14,7 @@ class CountryDao {
 		cities
 	}
 	
-	def getPopulation(name : String) : Int = {
+	def getPopulation(name : String): Int = {
 		val connection : Connection = DBConnection.getConnection
 		val resultSet = connection.createStatement.executeQuery(s"SELECT Population FROM COUNTRY WHERE Name = '$name'")
 		if(resultSet.first) resultSet.getInt("Population") else 0

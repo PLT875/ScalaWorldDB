@@ -5,9 +5,9 @@ import model._
 import scala.annotation.tailrec
 
 class CountryLanguageDao {
-	def getCountryLanguage(countryCode: String): List[CountryLanguage] = {
+	def getCountryLanguage(countryName: String): List[CountryLanguage] = {
 		val connection : Connection = DBConnection.getConnection
-		val resultSet = connection.createStatement.executeQuery(s"SELECT * FROM CountryLanguage WHERE CountryCode = '$countryCode'")
+		val resultSet = connection.createStatement.executeQuery(s"SELECT * FROM CountryLanguage WHERE CountryCode = (SELECT CountryCode FROM Country WHERE Name = '$countryName')")
 		val countryLanguages = queryCountryLanguageTable(resultSet, Nil)
 		connection.close
 		countryLanguages
