@@ -1,9 +1,9 @@
-import java.util.{Date, Locale}
-import java.text.{DateFormat, SimpleDateFormat}
-import java.sql.{ DriverManager, Connection, ResultSet }
-import dao._
-import model._
-import analytics._
+    import java.util.{Date, Locale}
+    import java.text.{DateFormat, SimpleDateFormat}
+    import java.sql.{ DriverManager, Connection, ResultSet }
+    import dao._
+    import model._
+    import analytics._
 
 /*
  * Author: Peter Tran
@@ -17,15 +17,15 @@ import analytics._
  * 
  */
 
-object World extends App {
-	val dateFormat = new SimpleDateFormat("yyyy-MM-dd").format(new Date)
-    println(s"*** $dateFormat: Getting Started with Scala - World Database Example ***")
-    
+ object World extends App {
+   val dateFormat = new SimpleDateFormat("yyyy-MM-dd").format(new Date)
+   println(s"*** $dateFormat: Getting Started with Scala - World Database Example ***")
+   
     // Set user name and password for database connection
     DBConnection.username; DBConnection.password
     
     menu
- 
+    
     def menu(): Unit = {
         println("")
         println("--- Options")
@@ -42,24 +42,24 @@ object World extends App {
         def listCities() : Unit = {
             println("")
             try {
-	            val countryCode = readLine("Enter a country code: ")
-	            val cityDao = new CityDao
-	    	    val cities = cityDao.getCities(countryCode)
-	            cities.foreach(println)
-	            println("")
-	            val yn = readLine("List population by district [y or n]: ")
-	            if(yn equals "y"){
-	            	val popByDistrict = CityAnalytics.populationByDistrict(cities)
-	            	popByDistrict.foreach { case (key, value) => println ("(" + key + ", " + value + ")") }
-	            }      
-            } catch {
-            	case e : Throwable => println(e.getMessage)
-            } finally {
+               val countryCode = readLine("Enter a country code: ")
+               val cityDao = new CityDao
+               val cities = cityDao.getCities(countryCode)
+               cities.foreach(println)
+               println("")
+               val yn = readLine("List population by district [y or n]: ")
+               if(yn equals "y"){
+                  val popByDistrict = CityAnalytics.populationByDistrict(cities)
+                  popByDistrict.foreach { case (key, value) => println ("(" + key + ", " + value + ")") }
+              }      
+              } catch {
+               case e : Throwable => println(e.getMessage)
+               } finally {
                 menu
             }		
         }
-    
-    
+        
+        
     }
     
     /*
@@ -100,6 +100,6 @@ object World extends App {
 	}
 	
 	**/
-   
+ 
     
 }

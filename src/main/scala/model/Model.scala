@@ -11,5 +11,5 @@ class Country(val name : String, val region : String, val surfaceArea : Double, 
 }
 
 class CountryLanguage(val countryCode : String, val language : String, val isOfficial : Boolean, val percentage : Double){
-    override def toString() = "(" + this.countryCode + ", " + this.language + ", " + this.isOfficial + ", " + this.percentage + ")"
+	override def toString() = "(" + this.countryCode + ", " + this.language + ", " + this.isOfficial + ", " + this.percentage + ")"
 }
