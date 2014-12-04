@@ -29,6 +29,7 @@ object World extends App {
 		connection.createStatement.executeQuery(s"SELECT 1")
 		menu
 	} catch {
+		// The application is terminated on the event of invalid user name and password
 		case e: Throwable => println(e.getMessage)
 	}
 
