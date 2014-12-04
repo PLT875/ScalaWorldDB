@@ -24,7 +24,14 @@ object World extends App {
 
 	// Set user name and password for database connection
 	DBConnection.username; DBConnection.password
-	menu
+	try {
+		val connection : Connection = DBConnection.getConnection
+		connection.createStatement.executeQuery(s"SELECT 1")
+		menu
+	} catch {
+		case e: Throwable => println(e.getMessage)
+	}
+
 	
 	def menu: Unit = {
 		println("")
@@ -35,7 +42,6 @@ object World extends App {
 		println("--- d. List Population By Country District")
 		println("--- x. Exit")
 		val option = readLine("Enter an option: ")
-
 		try {
 			matchChoice(option)
 		} catch {
@@ -60,12 +66,12 @@ object World extends App {
 		cities.foreach(println)
 		println("")
 		val yn = readLine("List population by district [y or n]: ")
+		
 		if (yn equals "y") {
-			val popByDistrict = CityAnalytics.populationByDistrict(cities)
-			popByDistrict.foreach { 
-				case (key, value) => println("(" + key + ", " + value + ")") 
-			}
+			val popByDistrict = CityAnalytics.populationByDistrict(cities);
+			popByDistrict.foreach { case (key, value) => println("(" + key + ", " + value + ")") }
 		}
+		
 	}
 	
 	def listPopulationDensityByRegion: Unit = {

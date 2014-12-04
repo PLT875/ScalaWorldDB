@@ -8,10 +8,10 @@ object DBConnection {
 	lazy val username : String = readLine("Enter username: ")
 	lazy val password : String = new String(System.console.readPassword("Enter password: "))
 	
-	def getConnection(): Connection = {
+	def getConnection : Connection = {
 		Class.forName(DBConnection.driver)
 		DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password)
 	}
 	
-	override def toString() = this.driver + " | " + this.url + " | " + this.username + " | " + this.password
+	override def toString = this.driver + " | " + this.url + " | " + this.username + " | " + this.password
 }
