@@ -89,7 +89,7 @@ object World extends App {
 		val countryDao = new CountryDao
 		val population = countryDao.getPopulation(country)
 		val languages = countryLanguageDao.getCountryLanguage(country)
-		CountryLanguageAnalytics.languagePopulation(languages, population).foreach(println)
+		CountryLanguageAnalytics.languagePopulation(population)(languages).foreach(println)
 	}
 
 	def listPopulationByDistrict: Unit = {
